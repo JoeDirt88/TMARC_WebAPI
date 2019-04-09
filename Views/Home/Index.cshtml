@@ -1,0 +1,56 @@
+﻿
+<style>
+    .reg-container {
+        position: absolute;
+        left: 25%;
+        top: 25%;
+    }
+
+    .bg-TMARC-hf, card-header, card-footer {
+        background: rgba(0, 0, 0, 0.5) !important;
+        text-align: center !important;
+        horiz-align: center !important;
+    }
+
+    .bg-TMARC-body {
+        background: rgba(255, 255, 255, 0.8) !important;
+        text-align: center !important;
+        horiz-align: center !important;
+    }
+
+    .col-welcome {
+        color: aliceblue !important;
+    }
+</style>
+
+<body onload="ipLookUp()">
+    <div class="reg-container">
+        <div class="card bg-transparent">
+            <div class="card-header bg-TMARC-hf">
+                @* Greeting and logo *@
+                <img src="~/Content/Images/TMARC-LOGO-WInverted.png" title="Logo" width="200px" height="auto" />
+                <h3 class="text-uppercase col-welcome">Welcome to the TMARC rewards registration page</h3>
+            </div>
+            <div class="card-body bg-TMARC-body">
+                @* Form fields *@
+                @{
+                    switch (Session["currentWindow"])
+                    {
+                        case 0:
+                            @Html.Partial("~/Views/Workflow/_PartialRegistration.cshtml");
+                            break;
+                        case 1:
+                            @Html.Partial("~/Views/Workflow/_PartialOptIn.cshtml");
+                            break;
+                        case 2:
+                            @Html.Partial("~/Views/Workflow/_PartialFirstName.cshtml");
+                            break;
+                        case 3:
+                            @Html.Partial("~/Views/Workflow/_PartialProfiling.cshtml");
+                            break;
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</body>

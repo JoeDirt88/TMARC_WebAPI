@@ -1,0 +1,64 @@
+﻿@using TMARC_WebAPI.Models
+@{
+    var location = (ObjIpLookup)HttpContext.Current.Session["currentLoc"];
+}
+
+<style>
+    .bg-pi {
+        color: palevioletred;
+    }
+
+    .sp-rf {
+        color: forestgreen;
+    }
+
+    .bg-br {
+        color: green;
+        opacity: 0.7;
+        filter: blur(2px);
+    }
+
+    .bg-db {
+        color: blueviolet;
+        transform: scale(0.8);
+        opacity: 0.8;
+        margin-left: 8%;
+    }
+</style>
+
+<p class="clearfix text-muted text-sm-center mb-0 px-2 col-welcome">
+    <span class="float-md-left d-xs-block d-md-inline-block">
+        Copyright &copy; @DateTime.Now.Year - All rights reserved.
+    </span>
+    <span class="float-md-right d-xs-block d-md-inline-block">
+        Mind-Full Solutions <span class="fa-stack">
+            <i class="fas fa-brain fa-stack-2x bg-br"></i>
+            <i class="fas fa-code-branch fa-stack-2x bg-db"></i>
+        </span>
+    </span>
+</p>
+
+@{
+    if (location != null)
+    {
+        <p class="clearfix text-muted text-sm-center mb-0 px-2 col-welcome" id="footerjoy">
+            <span class="float-md-left d-xs-block d-md-inline-block">
+                <i class="fas fa-globe-africa"></i> @location.country <i class="fas fa-map-marked-alt"></i> @location.regionName <i class="fas fa-city"></i> @location.city
+            </span>
+            <span>
+                <i class="far fa-calendar-alt"></i> @location.CaptureTime.ToShortDateString() <i class="far fa-clock"></i> @location.CaptureTime.ToShortTimeString()
+            </span>
+            <span class="float-md-right d-xs-block d-md-inline-block"><i class="fas fa-map-pin"></i> @location.timezone</span>
+        </p>
+    }
+    else
+    {
+        <p class="clearfix text-muted text-sm-center mb-0 px-2 col-welcome">
+            <span class="float-md-left d-xs-block d-md-inline-block">
+                <i class="fas fa-globe-africa"></i> Country <i class="fas fa-map-marked-alt"></i> Province <i class="fas fa-city"></i> City
+            </span>
+            <span><strong>Refresh to see more details</strong> <i class="fas fa-sync-alt fa-spin fa-spinner sp-rf"></i></span>
+            <span class="float-md-right d-xs-block d-md-inline-block"><i class="fas fa-map-pin"></i> Time-Zone</span>
+        </p>
+    }
+}

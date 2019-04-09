@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    @* Personal styling links *@
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+    <style>
+        body {
+            background: black;
+            background-image: url('../../Content/Images/home-002.jpg');
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+
+    </div>
+    <footer class="fixed-bottom bg-TMARC-hf">
+        @Html.Partial("~/Views/Shared/_FooterStrip.cshtml")
+    </footer>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    <script>
+    $(document).ready(function ipLookUp() {
+        $.ajax({
+            url: 'http://ip-api.com/json',
+            type: 'GET',
+            success: function (data) {
+                saveDetails(data);
+            },
+            error: function () {
+                alert("error IP-API");
+            }
+        });
+
+    });
+
+    function saveDetails(objResponse) {
+        $.ajax({
+            url: '@Url.Action("Locate","Home")',
+            type: 'POST',
+            data: JSON.stringify(objResponse),
+            contentType: 'application/json',
+            success: function (data) {
+                //UpdateFooter(data);
+            },
+            error: function () {
+                alert("error Saving");
+            }
+        });
+        };
+
+        function UpdateFooter(location) {
+            // TODO: get this data right and it will be BOMB
+            document.getElementById('footerjoy').innerHTML =
+                "<p class=\"clearfix text-muted text-sm-center mb-0 px-2 col-welcome\">" +
+                "<span class=\"float-md-left d-xs-block d-md-inline-block\">" +
+                "<i class=\"fas fa-globe-africa\"></i> " +
+                location.country +
+                "<i class=\"fas fa-map-marked-alt\"></i> " +
+                location.regionName +
+                "< i class=\"fas fa - city\" ></i >" +
+                location.city +
+                "</span><span><i class=\"far fa-calendar-alt\"></i> " +
+                //location.CaptureTime.ToShortDateString() +
+                "<i class=\"far fa-clock\"></i> " +
+                //location.CaptureTime.ToShortTimeString() +
+                "</span ><span class=\"float-md-right d-xs-block d-md-inline-block\"><i class=\"fas fa-map-pin\"></i>" +
+                location.timezone +
+                "</span ></p>";
+            alert(document.getElementById("footerjoy").innerHTML);
+        }
+    </script>
+</body>
+</html>

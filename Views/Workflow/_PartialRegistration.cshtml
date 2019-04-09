@@ -1,0 +1,21 @@
+﻿@model TMARC_WebAPI.Models.ClientModel
+
+@using (Html.BeginForm("Registration", "Home", FormMethod.Post, new { @id = "frmUserLogin", @name = "frmUserLogin" }))
+{
+    <div class="form-fields">
+        <div class="row">
+            <div class="col-6">
+                <label for="login-name" class="important">Please enter your registration key</label>
+            </div>
+            <div class="col-6">
+                @Html.EditorFor(userlogin => userlogin.Keyword, new { htmlAttributes = new { @required = "required", @class = "form-control" } })
+            </div>
+        </div>
+        <span class="float-md-right mt-5 pr-2">
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-key" style="color: aliceblue"></i> Register
+            </button>
+            @Html.ValidationMessage("loginError", new { @class = "text-danger" })
+        </span>
+    </div>
+}

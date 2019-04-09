@@ -1,0 +1,37 @@
+﻿C# Practical test 
+We need a windows service that will provide responses to a client. You can assume that the client is a basic text based IM. 
+For the purposes of testing you can create a basic Winform or web client that uses the service.  
+ 
+The service needs to take a text input provide a text response.  
+ 
+It needs to provide a workflow and follow the following steps and maintain state of the client.  
+1. Registration 
+2. Opt in 
+3. First Name  
+4. Profiling 
+5. Rewarding 
+6. End
+
+In the registration step the service must validate the registration based on one of two keywords: 
+1. Cm1234 
+2. Loyalty24 
+
+A person must opt-in and an opt-in question for provide personal data, communication via sms, email and IM and participation in marketing activations. 
+ 
+A question should be asked to obtain the First name.  
+ 
+You should go into a profiling phase where a certain number of profile questions are askers (say 3 questions such as age, gender and province) 
+ 
+Once the profile is complete the person may or may not receive a reward. Issuing of rewards should be randomised. 
+ 
+Then there is an end state. 
+ 
+The service should account for the broken connection from the client and pick up where left off.  
+ 
+You can assume one client for now. 
+ 
+We are looking for the following: 
+1. Use of WCF 
+2. Use of polymorphism in c# 
+3. OO techniques 
+4. Code clarity and an attempt to build for robustness 
